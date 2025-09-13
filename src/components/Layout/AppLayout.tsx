@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Box, CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
+import React from 'react';
+import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Sidebar from './Sidebar';
 import ChatArea from '../Chat/ChatArea';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4361ee',
+      main: '#4361ee', 
     },
     background: {
       default: '#ffffff',
@@ -43,22 +43,11 @@ const theme = createTheme({
 });
 
 const AppLayout: React.FC = () => {
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ display: 'flex', height: '100vh' }}>
-        <Sidebar
-          isMobile={isMobile}
-          mobileOpen={mobileOpen}
-          handleDrawerToggle={handleDrawerToggle}
-        />
+        <Sidebar />
         <Box
           component="main"
           sx={{
@@ -66,7 +55,7 @@ const AppLayout: React.FC = () => {
             bgcolor: 'background.default',
           }}
         >
-          <ChatArea handleDrawerToggle={handleDrawerToggle} isMobile={isMobile}/>
+          <ChatArea />
         </Box>
       </Box>
     </ThemeProvider>
