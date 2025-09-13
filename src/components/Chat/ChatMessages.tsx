@@ -38,7 +38,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({ messages }) => {
             elevation={0}
             sx={{
               p: 2,
-              maxWidth: '70%',
+              maxWidth: { xs: '85%', sm: '70%' },
               bgcolor: message.role === 'user' ? 'grey.100' : 'background.paper',
               border: '1px solid',
               borderColor: 'grey.200',
