@@ -1,19 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Button,
-  Tooltip,
-  Typography,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  InputBase,
-  Paper,
-  Avatar,
-} from "@mui/material";
+import {Box, IconButton, Button, Tooltip, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText, InputBase, Paper, Avatar, Drawer,} from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 
 // Icons
@@ -71,8 +57,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+interface SidebarProps {
+  isMobile: boolean;
+  mobileOpen: boolean;
+  handleDrawerToggle: () => void;
+}
 
-const Sidebar: React.FC = () => {
+
+const Sidebar: React.FC<SidebarProps> = ({ isMobile, mobileOpen, handleDrawerToggle }) => {
   const {
     sidebarOpen,
     toggleSidebar,
@@ -95,10 +87,8 @@ const Sidebar: React.FC = () => {
     chat.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-
-  return (
+  const SidebarContent = (
     <Box
-      component="aside"
       sx={{
         width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED,
         flexShrink: 0,
@@ -343,6 +333,28 @@ const Sidebar: React.FC = () => {
         </Box>
       </Box>
     </Box>
+  );
+
+  return (
+    <>
+      {isMobile ? (
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, 
+          }}
+          sx={{
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: SIDEBAR_WIDTH },
+          }}
+        >
+          {SidebarContent}
+        </Drawer>
+      ) : (
+        SidebarContent
+      )}
+    </>
   );
 };
 
