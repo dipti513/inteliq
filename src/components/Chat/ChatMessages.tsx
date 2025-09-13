@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography, Avatar, Paper } from '@mui/material';
 import { Person, SmartToy } from '@mui/icons-material';
 import { Message } from '../../types';
@@ -38,7 +37,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({ messages }) => {
             elevation={0}
             sx={{
               p: 2,
-              maxWidth: { xs: '85%', sm: '70%' },
+              maxWidth: '70%',
               bgcolor: message.role === 'user' ? 'grey.100' : 'background.paper',
               border: '1px solid',
               borderColor: 'grey.200',
