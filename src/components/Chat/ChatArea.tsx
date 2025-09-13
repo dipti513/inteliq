@@ -5,34 +5,39 @@ import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
 import { useChatStore } from '../../store/ChatStore';
 
-const ChatArea: React.FC = () => {
+interface ChatAreaProps {
+  isMobile: boolean;
+  handleDrawerToggle: () => void;
+}
+
+const ChatArea: React.FC<ChatAreaProps> = ({ isMobile, handleDrawerToggle }) => {
   const { getCurrentChat } = useChatStore();
   const currentChat = getCurrentChat();
 
   return (
-    <Box sx={{ 
-      height: '100vh', 
-      display: 'flex', 
+    <Box sx={{
+      height: '100vh',
+      display: 'flex',
       flexDirection: 'column',
       bgcolor: 'background.default',
-      gap: '10px' 
+      gap: '10px'
     }}>
-      <ChatHeader />  
+      <ChatHeader isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />
 
-      <Box sx={{ 
-        flexGrow: 1, 
-        display: 'flex', 
+      <Box sx={{
+        flexGrow: 1,
+        display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden'
       }}>
-        <Container 
-          maxWidth="md" 
-          sx={{ 
-            flexGrow: 1, 
-            display: 'flex', 
+        <Container
+          maxWidth="md"
+          sx={{
+            flexGrow: 1,
+            display: 'flex',
             flexDirection: 'column',
-            pt: 1, 
-            pb: 2, 
+            pt: 1,
+            pb: 2,
             px: { xs: 2, sm: 3 }
           }}
         >
