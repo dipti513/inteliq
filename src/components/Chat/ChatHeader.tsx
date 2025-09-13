@@ -1,14 +1,15 @@
 import {Box, IconButton, Button, Toolbar, Select, MenuItem, SelectChangeEvent} from '@mui/material';
-import { Share, Help, Add} from '@mui/icons-material';
+import { Share, Help, Add, Menu } from '@mui/icons-material';
 
 import { useChatStore } from '../../store/ChatStore';
 
-interface ChatModel {
-  model: string;
-  setModel: (model: string) => void;
+interface ChatHeaderProps {
+  isMobile: boolean;
+  handleDrawerToggle: () => void;
 }
 
-const ChatHeader: React.FC = () => {
+
+const ChatHeader: React.FC<ChatHeaderProps> = ({ isMobile, handleDrawerToggle }) => {
   const { model, setModel, createNewChat } = useChatStore();
 
   const handleModelChange = (event: SelectChangeEvent<string>) => {
@@ -25,45 +26,57 @@ const ChatHeader: React.FC = () => {
       }}
     >
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx={{
-          bgcolor: 'action.hover',
-          borderRadius: '12px',
-          p: '4px 12px',
-        }}>
-          <Select
-            value={model}
-            onChange={handleModelChange}
-            variant="standard"
-            disableUnderline
-            sx={{ 
-              fontWeight: 'bold', 
-              fontSize: '0.9rem',
-              '& .MuiSelect-icon': {
-                color: 'text.secondary',
-              }
-            }}
-            MenuProps={{
-              anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'left',
-              },
-              transformOrigin: {
-                vertical: 'top',
-                horizontal: 'left'
-              },
-              slotProps: {
-                paper: {
-                  sx: {
-                    borderRadius: '12px',
-                    mt: 1
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          {isMobile && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+            >
+              <Menu />
+            </IconButton>
+          )}
+          <Box sx={{
+            bgcolor: 'action.hover',
+            borderRadius: '12px',
+            p: '4px 12px',
+          }}>
+            <Select
+              value={model}
+              onChange={handleModelChange}
+              variant="standard"
+              disableUnderline
+              sx={{ 
+                fontWeight: 'bold', 
+                fontSize: '0.9rem',
+                '& .MuiSelect-icon': {
+                  color: 'text.secondary',
+                }
+              }}
+              MenuProps={{
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                },
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'left'
+                },
+                slotProps: {
+                  paper: {
+                    sx: {
+                      borderRadius: '12px',
+                      mt: 1
+                    }
                   }
                 }
-              }
-            }}
-          >
-            <MenuItem value="ChatGPT 4">ChatGPT 4</MenuItem>
-            <MenuItem value="ChatGPT 3.5">ChatGPT 3.5</MenuItem>
-          </Select>
+              }}
+            >
+              <MenuItem value="ChatGPT 4">ChatGPT 4</MenuItem>
+              <MenuItem value="ChatGPT 3.5">ChatGPT 3.5</MenuItem>
+            </Select>
+          </Box>
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
