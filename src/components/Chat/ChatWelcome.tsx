@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import SuggestionCard from './SuggestionCard';
 import { useChatStore } from '../../store/ChatStore';
@@ -38,7 +37,7 @@ const ChatWelcome: React.FC = () => {
           fontWeight="300"
           color="text.primary"
           sx={{
-            fontSize: { xs: '2.5rem', sm: '3.00rem' },
+            fontSize: { xs: '3.00rem', sm: '3.00rem' },
             textAlign: 'left',
           }}
         >
